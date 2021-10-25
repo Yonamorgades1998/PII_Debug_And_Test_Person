@@ -4,12 +4,14 @@ namespace UnitTestAndDebug
 {
     public class Person
     {
-        public Person(string name, string id)
+        public Person(string name, string id, string date)
         {
             this.Name = name;
             this.ID = id;
+            this.BornDate = date;
         }
 
+        private string borndate;
         private string name;
 
         private string id;
@@ -45,9 +47,26 @@ namespace UnitTestAndDebug
             }
         }
 
+        public string BornDate
+        {
+            get
+            {
+                return this.borndate;
+            }
+            
+            set
+            {   
+                string[] date = value.Split('/');
+
+                if (Int32.Parse(date[0])  < 31 && Int32.Parse(date[0]) > 1 &&  Int32.Parse(date[1]) > 1 && Int32.Parse(date[1]) < 12 && Int32.Parse(date[2]) > 1900)
+                {
+                    this.borndate = value;
+                }
+            }
+        }
         public void IntroduceYourself()
         {
-            Console.WriteLine($"Soy {this.Name} y mi cédula es {this.ID}");
+            Console.WriteLine($"Soy {this.Name} y mi cédula es {this.ID} y su fecha de nacimiento es {this.BornDate}");
         }
     }
 }
